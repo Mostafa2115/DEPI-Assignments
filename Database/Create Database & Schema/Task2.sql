@@ -1,0 +1,22 @@
+CREATE TABLE Departments (
+    DepartmentId INT IDENTITY(1,1) PRIMARY KEY,
+    DepartmentName NVARCHAR(100) NOT NULL
+);
+CREATE TABLE Employees (
+    EmployeeId INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(100) NOT NULL,
+    Email NVARCHAR(150) NOT NULL UNIQUE,
+    Salary DECIMAL(10,2) NOT NULL,
+    DepartmentId INT NOT NULL
+    FOREIGN KEY REFERENCES Departments(DepartmentId),
+    CreatedAt DATETIME NOT NULL DEFAULT GETDATE()
+);
+
+CREATE TABLE Orders (
+    OrderId INT IDENTITY(1,1) PRIMARY KEY,
+    EmployeeId INT NOT NULL
+    FOREIGN KEY REFERENCES Employees(EmployeeId),
+    OrderDate DATETIME NOT NULL,
+    TotalAmount DECIMAL(10,2) NOT NULL
+);
+
